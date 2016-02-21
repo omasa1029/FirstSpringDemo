@@ -24,21 +24,10 @@ public class FirstSpringDemoApplicationTests {
 	public void contextLoads() {
 	}
 
-	@Test
 	public void test_getUserList_a() {
-		User u1 = new User() {
-			{
-				setId("1");
-				setName("Tanaka");
-			}
-		};
-		User u2 = new User() {
-			{
-				setId("2");
-				setName("Satou");
-			}
-		};
-
+		User u1 = User.builder().id("1").name("Tanaka").build();
+		User u2 = User.builder().id("2").name("Satou").build();
+		
 		List<User> expected = Arrays.asList(u1, u2);
 		List<User> actual = new HelloCounter().getUserList();
 
