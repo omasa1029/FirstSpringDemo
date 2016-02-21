@@ -8,7 +8,7 @@ import com.example.entity.User;
 
 @Service
 public interface UserService {
-	List<User> getAllUsers();
+    List<User> getAllUsers();
 
-	User getUser(String userId);
+    User getUser(String userId);
 }

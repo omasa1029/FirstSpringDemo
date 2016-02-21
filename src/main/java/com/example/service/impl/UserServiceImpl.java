@@ -12,16 +12,16 @@ import com.example.service.UserService;
 @Service
 public class UserServiceImpl implements UserService {
 
-	@Autowired
-	UserRepository userRepository;
+    @Autowired
+    UserRepository userRepository;
 
-	@Override
-	public List<User> getAllUsers() {
-		return userRepository.findAll();
-	}
+    @Override
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
+    }
 
-	@Override
-	public User getUser(String userId) {
-		return userRepository.findById(userId);
-	}
+    @Override
+    public User getUser(String userId) {
+        return userRepository.findById(userId);
+    }
 }

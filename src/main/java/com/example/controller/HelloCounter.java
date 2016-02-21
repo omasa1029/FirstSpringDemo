@@ -13,21 +13,21 @@ import com.example.service.UserService;
 @RestController
 public class HelloCounter {
 
-	@Autowired
-	UserService userService;
+    @Autowired
+    UserService userService;
 
-	@RequestMapping("/")
-	public String index() {
-		return "This is the Spring Boot sample!";
-	}
+    @RequestMapping("/")
+    public String index() {
+        return "This is the Spring Boot sample!";
+    }
 
-	@RequestMapping("/userlist")
-	public List<User> getUserList() {
-		return userService.getAllUsers();
-	}
+    @RequestMapping("/userlist")
+    public List<User> getUserList() {
+        return userService.getAllUsers();
+    }
 
-	@RequestMapping("/user")
-	public User getUser(@RequestParam String userId) {
-		return userService.getUser(userId);
-	}
+    @RequestMapping("/user")
+    public User getUser(@RequestParam String userId) {
+        return userService.getUser(userId);
+    }
 }

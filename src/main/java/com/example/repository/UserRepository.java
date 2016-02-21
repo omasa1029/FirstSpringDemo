@@ -5,8 +5,7 @@ import java.util.List;
 import com.example.entity.User;
 
 public interface UserRepository {
-	List<User> findAll();
+    List<User> findAll();
 
-	User findById(String id);
-
+    User findById(String id);
 }

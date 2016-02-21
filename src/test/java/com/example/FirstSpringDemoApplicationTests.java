@@ -1,7 +1,7 @@
 package com.example;
 
-import static org.junit.Assert.*;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertThat;
 
 import java.util.Arrays;
 import java.util.List;
@@ -20,17 +20,23 @@ import com.example.entity.User;
 @WebAppConfiguration
 public class FirstSpringDemoApplicationTests {
 
-	@Test
-	public void contextLoads() {
-	}
+    @Test
+    public void contextLoads() {
+    }
 
-	public void test_getUserList_a() {
-		User u1 = User.builder().id("1").name("Tanaka").build();
-		User u2 = User.builder().id("2").name("Satou").build();
-		
-		List<User> expected = Arrays.asList(u1, u2);
-		List<User> actual = new HelloCounter().getUserList();
+    @Test
+    public void test_01() {
+        assertThat(1, is(1));
+    }
 
-		assertThat(actual, is(expected));
-	}
+    // TODO Springテスト化
+    public void test_getUserList_a() {
+        User u1 = User.builder().id("1").name("Tanaka").build();
+        User u2 = User.builder().id("2").name("Satou").build();
+
+        List<User> expected = Arrays.asList(u1, u2);
+        List<User> actual = new HelloCounter().getUserList();
+
+        assertThat(actual, is(expected));
+    }
 }
