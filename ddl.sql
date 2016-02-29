@@ -3,8 +3,10 @@ select * from sys.systables;
 CREATE TABLE APP.UserMaster (
     id varchar(10) not null,
     name varchar(50),
-    constraint P_User primary key(id)
+    constraint P_UserMaster primary key(id)
 );
+
+drop table app.usera
 
 select * from app.usermaster
 

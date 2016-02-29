@@ -3,7 +3,9 @@ package com.example.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -11,8 +13,11 @@ import com.example.entity.User;
 import com.example.service.UserService;
 
 @RestController
+@RequestMapping("/user")
 public class HelloCounter {
 
+    //TODO データベースをちゃんとする
+    
     @Autowired
     UserService userService;
 
@@ -21,13 +26,28 @@ public class HelloCounter {
         return "This is the Spring Boot sample!";
     }
 
-    @RequestMapping("/userlist")
+    @RequestMapping("/list")
     public List<User> getUserList() {
         return userService.getAllUsers();
     }
 
-    @RequestMapping("/user")
-    public User getUser(@RequestParam String userId) {
-        return userService.getUser(userId);
+    @RequestMapping("/get")
+    public User getUser(@RequestParam Long id) {
+        return userService.getUser(id);
+    }
+
+    @RequestMapping(value="/add", method=RequestMethod.POST)
+    public User addUser(@RequestBody User user) {
+        return userService.addUser(user);
+    }
+
+    @RequestMapping(value="/modify", method=RequestMethod.POST)
+    public User modifyUser(@RequestBody User user) {
+        return userService.modifyUser(user);
+    }
+
+    @RequestMapping("/remove")
+    public User removeUser(@RequestParam Long id) {
+        return userService.removeUser(id);
     }
 }
