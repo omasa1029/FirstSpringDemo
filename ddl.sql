@@ -1,5 +1,5 @@
-create database user;
-use user;
+--create database user;
+--use user;
 
 --drop table usermaster;
 create table usermaster (
