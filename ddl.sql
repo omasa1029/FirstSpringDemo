@@ -1,16 +1,16 @@
-select * from sys.systables;
+create database user;
+use user;
 
-CREATE TABLE APP.UserMaster (
-    id varchar(10) not null,
-    name varchar(50),
+--drop table usermaster;
+create table usermaster (
+    id int not null auto_increment,
+    name varchar(50) not null,
     constraint P_UserMaster primary key(id)
 );
 
-drop table app.usera
+insert into usermaster values(1, 'Tanaka Naoto');
+insert into usermaster values(2, 'Satou Shigeki');
+insert into usermaster values(3, 'Fukuda Shuhei');
 
-select * from app.usermaster
+select * from user.usermaster;
 
-
-CREATE TABLE APP.HOTELAVAILABILITY
-     (HOTEL_ID INT NOT NULL, BOOKING_DATE DATE NOT NULL,
-    ROOMS_TAKEN INT DEFAULT 0, PRIMARY KEY (HOTEL_ID, BOOKING_DATE));

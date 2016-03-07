@@ -10,7 +10,7 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "USERMASTER")
+@Table(name = "usermaster")
 public class User {
     @Id
     @GeneratedValue
