@@ -16,8 +16,8 @@ import com.example.service.UserService;
 @RequestMapping("/user")
 public class HelloCounter {
 
-    //TODO データベースをちゃんとする
-    
+    // TODO 例外処理を共通化
+
     @Autowired
     UserService userService;
 
@@ -36,12 +36,12 @@ public class HelloCounter {
         return userService.getUser(id);
     }
 
-    @RequestMapping(value="/add", method=RequestMethod.POST)
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
     public User addUser(@RequestBody User user) {
         return userService.addUser(user);
     }
 
-    @RequestMapping(value="/modify", method=RequestMethod.POST)
+    @RequestMapping(value = "/modify", method = RequestMethod.POST)
     public User modifyUser(@RequestBody User user) {
         return userService.modifyUser(user);
     }
