@@ -12,50 +12,61 @@ import com.example.service.UserService;
 
 @Service
 public class UserServiceImpl implements UserService {
-    
-    //TODO トランザクションとロギング
+
+    // TODO トランザクション、なぜかアノテーションつけなくてもトランザクションが効いてるぽい？
+    // TODO トランザクションのベースクラスにアノテーションをつけておく
 
     @Autowired
     UserRepository userRepository;
 
     @Override
-    public List<User> getAllUsers() {
+    public List<User> getAll() {
         List<User> users = new ArrayList<User>();
-        
+
         Iterable<User> iterable = userRepository.findAll();
         iterable.forEach(element -> users.add(element));
-        
+
         return users;
     }
 
     @Override
-    public List<User> getUsersInPage() {
+    public List<User> getInPage() {
         List<User> users = new ArrayList<User>();
-        
+
         Iterable<User> iterable = userRepository.findAll(UserRepository.DEFAULT_PAGE_REQUEST);
         iterable.forEach(element -> users.add(element));
-        
+
         return users;
     }
 
     @Override
-    public User getUser(Long id) {
+    public User get(Long id) {
         return userRepository.findOne(id);
     }
 
     @Override
-    public User addUser(User user) {
-        return userRepository.save(user);
+    public User add(User user) {
+        userRepository.save(user);
+        // TODO 後で削除 例外を発生させる
+        userRepository.delete(0L);
+        // return userRepository.save(user);
+        return null;
     }
 
     @Override
-    public User modifyUser(User user) {
-        return userRepository.save(user);
+    public User modify(User user) {
+        userRepository.save(user);
+        // TODO 後で削除 例外を発生させる
+        userRepository.delete(0L);
+        // return userRepository.save(user);
+        return null;
     }
 
     @Override
-    public User removeUser(Long id) {
+    public User remove(Long id) {
         userRepository.delete(id);
+        // TODO 後で削除 例外を発生させる
+        userRepository.delete(0L);
         return null;
     }
 }

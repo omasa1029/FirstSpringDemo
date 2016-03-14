@@ -28,26 +28,26 @@ public class HelloCounter {
 
     @RequestMapping("/list")
     public List<User> getUserList() {
-        return userService.getAllUsers();
+        return userService.getAll();
     }
 
     @RequestMapping("/get")
     public User getUser(@RequestParam Long id) {
-        return userService.getUser(id);
+        return userService.get(id);
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public User addUser(@RequestBody User user) {
-        return userService.addUser(user);
+        return userService.add(user);
     }
 
     @RequestMapping(value = "/modify", method = RequestMethod.POST)
     public User modifyUser(@RequestBody User user) {
-        return userService.modifyUser(user);
+        return userService.modify(user);
     }
 
     @RequestMapping("/remove")
     public User removeUser(@RequestParam Long id) {
-        return userService.removeUser(id);
+        return userService.remove(id);
     }
 }
