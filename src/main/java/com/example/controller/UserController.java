@@ -14,9 +14,10 @@ import com.example.service.UserService;
 
 @RestController
 @RequestMapping("/user")
-public class HelloCounter {
+public class UserController {
 
     // TODO 例外処理を共通化
+    // TODO Validationを追加
 
     @Autowired
     UserService userService;
@@ -27,27 +28,27 @@ public class HelloCounter {
     }
 
     @RequestMapping("/list")
-    public List<User> getUserList() {
+    public List<User> list() {
         return userService.getAll();
     }
 
     @RequestMapping("/get")
-    public User getUser(@RequestParam Long id) {
+    public User get(@RequestParam Long id) {
         return userService.get(id);
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public User addUser(@RequestBody User user) {
+    public User add(@RequestBody User user) {
         return userService.add(user);
     }
 
     @RequestMapping(value = "/modify", method = RequestMethod.POST)
-    public User modifyUser(@RequestBody User user) {
+    public User modify(@RequestBody User user) {
         return userService.modify(user);
     }
 
     @RequestMapping("/remove")
-    public User removeUser(@RequestParam Long id) {
-        return userService.remove(id);
+    public void remove(@RequestParam Long id) {
+        userService.remove(id);
     }
 }

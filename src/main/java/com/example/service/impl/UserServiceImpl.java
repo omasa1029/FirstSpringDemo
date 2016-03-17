@@ -11,10 +11,9 @@ import com.example.repository.UserRepository;
 import com.example.service.UserService;
 
 @Service
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl extends BaseServiceImpl<User> implements UserService {
 
-    // TODO トランザクション、なぜかアノテーションつけなくてもトランザクションが効いてるぽい？
-    // TODO トランザクションのベースクラスにアノテーションをつけておく
+    // TODO Transactional ReadOnly=True はどんな意味？
 
     @Autowired
     UserRepository userRepository;
@@ -46,27 +45,16 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User add(User user) {
-        userRepository.save(user);
-        // TODO 後で削除 例外を発生させる
-        userRepository.delete(0L);
-        // return userRepository.save(user);
-        return null;
+        return userRepository.save(user);
     }
 
     @Override
     public User modify(User user) {
-        userRepository.save(user);
-        // TODO 後で削除 例外を発生させる
-        userRepository.delete(0L);
-        // return userRepository.save(user);
-        return null;
+        return userRepository.save(user);
     }
 
     @Override
-    public User remove(Long id) {
+    public void remove(Long id) {
         userRepository.delete(id);
-        // TODO 後で削除 例外を発生させる
-        userRepository.delete(0L);
-        return null;
     }
 }
