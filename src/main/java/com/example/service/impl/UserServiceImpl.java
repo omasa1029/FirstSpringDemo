@@ -14,6 +14,11 @@ import com.example.service.UserService;
 public class UserServiceImpl extends BaseServiceImpl<User> implements UserService {
 
     // TODO Transactional ReadOnly=True はどんな意味？
+    /*
+     READ ONLY 句を指定すると、そのトランザクションは読み取り専用モードになります。
+     このトランザクションで SELECT 文を実行すると、トランザクション開始前の状態のデータを参照することができます。
+     このトランザクション実行中に他のトランザクションでデータに変更が加えられても、その前の状態のデータを参照できるということです。
+     */
 
     @Autowired
     UserRepository userRepository;
