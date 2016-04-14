@@ -27,12 +27,12 @@ public class UserController {
         return "This is the Spring Boot sample!";
     }
 
-    @RequestMapping("/list")
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
     public List<User> list() {
         return userService.getAll();
     }
 
-    @RequestMapping("/get")
+    @RequestMapping(value = "/get", method = RequestMethod.GET)
     public User get(@RequestParam Long id) {
         return userService.get(id);
     }
@@ -42,13 +42,15 @@ public class UserController {
         return userService.add(user);
     }
 
-    @RequestMapping(value = "/modify", method = RequestMethod.POST)
+    @RequestMapping(value = "/modify", method = RequestMethod.PUT)
     public User modify(@RequestBody User user) {
         return userService.modify(user);
     }
 
-    @RequestMapping("/remove")
-    public void remove(@RequestParam Long id) {
+    //TODO なぜか、DELETEメソッドでDBに存在しないIDを指定すると、METHOD_NOT_ALLOWEDエラーになる
+    @RequestMapping(value = "/remove", method = RequestMethod.DELETE)
+    public User remove(@RequestParam Long id) {
         userService.remove(id);
+        return null;
     }
 }

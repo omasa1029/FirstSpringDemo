@@ -1,7 +1,8 @@
 package com.example.aspect;
 
-import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -21,9 +22,16 @@ public class GlobalControllerExceptionHandler {
         System.out.println("controller advice:model Attribute");
     }
 
-    @ResponseStatus(HttpStatus.CONFLICT) // 409
-    @ExceptionHandler(DataIntegrityViolationException.class)
-    public void handleConflict() {
-        // Nothing to do
+    @ExceptionHandler(EmptyResultDataAccessException.class)
+    @ResponseStatus(value = HttpStatus.NOT_FOUND)
+    public Exception handleException(Exception exception) {
+        return exception;
     }
+
+    @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
+    @ResponseStatus(value = HttpStatus.METHOD_NOT_ALLOWED)
+    public Exception handleHttpRequestMethodNotSupportedException(HttpRequestMethodNotSupportedException exception) {
+        return exception;
+    }
+
 }

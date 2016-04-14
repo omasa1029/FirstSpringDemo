@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.example.entity.User;
@@ -37,8 +38,14 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
     }
 
     @Override
-    public User get(Long id) {
-        return userRepository.findOne(id);
+    public User get(Long id) throws EmptyResultDataAccessException {
+        User user = userRepository.findOne(id);
+        if (user == null) {
+            // TODO 自前のExceptionクラスを作成する
+            throw new EmptyResultDataAccessException(1);
+        }
+
+        return user;
     }
 
     @Override
