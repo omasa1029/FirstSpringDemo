@@ -5,8 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
-
-import org.hibernate.validator.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import lombok.Data;
 
@@ -19,6 +19,7 @@ public class User {
     private Long id;
 
     @Column(nullable = false, length = 100)
-    @NotBlank
+    @NotNull
+    @Size(min = 1, max = 20)
     private String name;
 }

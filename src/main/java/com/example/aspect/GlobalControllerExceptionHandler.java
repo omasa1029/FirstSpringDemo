@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import com.example.exception.ApplicationException;
+
 @ControllerAdvice
 public class GlobalControllerExceptionHandler {
     @InitBinder
@@ -34,4 +36,15 @@ public class GlobalControllerExceptionHandler {
         return exception;
     }
 
+    @ExceptionHandler(ApplicationException.class)
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    public Exception handleApplicationException(ApplicationException exception) {
+        return exception;
+    }
+
+//    @ExceptionHandler(Throwable.class)
+//    @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
+//    public Throwable handleThrowable(Throwable throwable) {
+//        return throwable;
+//    }
 }

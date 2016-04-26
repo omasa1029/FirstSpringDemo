@@ -2,7 +2,10 @@ package com.example.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -10,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.entity.User;
+import com.example.exception.ApplicationException;
 import com.example.service.UserService;
 
 @RestController
@@ -38,7 +42,10 @@ public class UserController {
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public User add(@RequestBody User user) {
+    public User add(@RequestBody @Valid User user, Errors errors) {
+        if (errors.hasErrors()) {
+            throw new ApplicationException("E-0001", errors);
+        }
         return userService.add(user);
     }
 
@@ -47,7 +54,7 @@ public class UserController {
         return userService.modify(user);
     }
 
-    //TODO なぜか、DELETEメソッドでDBに存在しないIDを指定すると、METHOD_NOT_ALLOWEDエラーになる
+    // TODO なぜか、DELETEメソッドでDBに存在しないIDを指定すると、METHOD_NOT_ALLOWEDエラーになる
     @RequestMapping(value = "/remove", method = RequestMethod.DELETE)
     public User remove(@RequestParam Long id) {
         userService.remove(id);
