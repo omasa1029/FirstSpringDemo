@@ -27,24 +27,24 @@ public class GlobalControllerExceptionHandler {
     @ExceptionHandler(EmptyResultDataAccessException.class)
     @ResponseStatus(value = HttpStatus.NOT_FOUND)
     public Exception handleException(Exception exception) {
-        return exception;
+        return null;
     }
 
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
     @ResponseStatus(value = HttpStatus.METHOD_NOT_ALLOWED)
     public Exception handleHttpRequestMethodNotSupportedException(HttpRequestMethodNotSupportedException exception) {
-        return exception;
+        return null;
     }
 
     @ExceptionHandler(ApplicationException.class)
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)
     public Exception handleApplicationException(ApplicationException exception) {
-        return exception;
+        return null;
     }
 
-//    @ExceptionHandler(Throwable.class)
-//    @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
-//    public Throwable handleThrowable(Throwable throwable) {
-//        return throwable;
-//    }
+    @ExceptionHandler(Throwable.class)
+    @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
+    public Throwable handleThrowable(Throwable throwable) {
+        return null;
+    }
 }

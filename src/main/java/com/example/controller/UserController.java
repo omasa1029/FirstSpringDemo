@@ -20,8 +20,7 @@ import com.example.service.UserService;
 @RequestMapping("/user")
 public class UserController {
 
-    // TODO 例外処理を共通化
-    // TODO Validationを追加
+    // TODO 返却するJSONを共通化
 
     @Autowired
     UserService userService;
@@ -50,7 +49,10 @@ public class UserController {
     }
 
     @RequestMapping(value = "/modify", method = RequestMethod.PUT)
-    public User modify(@RequestBody User user) {
+    public User modify(@RequestBody @Valid User user, Errors errors) {
+        if (errors.hasErrors()) {
+            throw new ApplicationException("E-0002", errors);
+        }
         return userService.modify(user);
     }
 
