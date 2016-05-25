@@ -1,7 +1,5 @@
 package com.example.controller;
 
-import java.util.List;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.entity.User;
 import com.example.exception.ApplicationException;
+import com.example.http.Responce;
 import com.example.service.UserService;
 
 @RestController
@@ -31,35 +30,34 @@ public class UserController {
     }
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public List<User> list() {
-        return userService.getAll();
+    public Responce list() {
+        return new Responce(userService.getAll());
     }
 
     @RequestMapping(value = "/get", method = RequestMethod.GET)
-    public User get(@RequestParam Long id) {
-        return userService.get(id);
+    public Responce get(@RequestParam Long id) {
+        return new Responce(userService.get(id));
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public User add(@RequestBody @Valid User user, Errors errors) {
+    public Responce add(@RequestBody @Valid User user, Errors errors) {
         if (errors.hasErrors()) {
             throw new ApplicationException("E-0001", errors);
         }
-        return userService.add(user);
+        return new Responce(userService.add(user));
     }
 
     @RequestMapping(value = "/modify", method = RequestMethod.PUT)
-    public User modify(@RequestBody @Valid User user, Errors errors) {
+    public Responce modify(@RequestBody @Valid User user, Errors errors) {
         if (errors.hasErrors()) {
             throw new ApplicationException("E-0002", errors);
         }
-        return userService.modify(user);
+        return new Responce(userService.modify(user));
     }
 
-    // TODO なぜか、DELETEメソッドでDBに存在しないIDを指定すると、METHOD_NOT_ALLOWEDエラーになる
     @RequestMapping(value = "/remove", method = RequestMethod.DELETE)
-    public User remove(@RequestParam Long id) {
+    public Responce remove(@RequestParam Long id) {
         userService.remove(id);
-        return null;
+        return new Responce(null);
     }
 }

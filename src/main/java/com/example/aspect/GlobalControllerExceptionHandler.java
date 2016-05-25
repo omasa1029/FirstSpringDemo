@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import com.example.common.ErrorCode;
 import com.example.exception.ApplicationException;
+import com.example.http.Responce;
 
 @ControllerAdvice
 public class GlobalControllerExceptionHandler {
@@ -26,25 +28,25 @@ public class GlobalControllerExceptionHandler {
 
     @ExceptionHandler(EmptyResultDataAccessException.class)
     @ResponseStatus(value = HttpStatus.NOT_FOUND)
-    public Exception handleException(Exception exception) {
-        return null;
+    public Responce handleException(Exception exception) {
+        return new Responce(ErrorCode.NG, "NoData", exception);
     }
 
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
     @ResponseStatus(value = HttpStatus.METHOD_NOT_ALLOWED)
-    public Exception handleHttpRequestMethodNotSupportedException(HttpRequestMethodNotSupportedException exception) {
-        return null;
+    public Responce handleHttpRequestMethodNotSupportedException(HttpRequestMethodNotSupportedException exception) {
+        return new Responce(null);
     }
 
     @ExceptionHandler(ApplicationException.class)
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)
-    public Exception handleApplicationException(ApplicationException exception) {
-        return null;
+    public Responce handleApplicationException(ApplicationException exception) {
+        return new Responce(null);
     }
 
     @ExceptionHandler(Throwable.class)
     @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
-    public Throwable handleThrowable(Throwable throwable) {
-        return null;
+    public Responce handleThrowable(Throwable throwable) {
+        return new Responce(null);
     }
 }
